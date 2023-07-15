@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import ProductCard from '../components/home/ProductCard'
 import { axiosEcommerce } from '../utils/configAxios'
 
@@ -9,6 +9,10 @@ const Home = () => {
     const [products, setProducts] = useState([])
 
     const [productName, setProductName] = useState("")
+    const [currentCategory, setCurrentCategory] = useState(0)
+
+
+
 
 
     const handleSubmit = (e) => {
@@ -17,11 +21,15 @@ const Home = () => {
         setProductName(newProductName)
 
     }
-    const productsByName = products.filter((product) => product.title.toLowerCase().includes(productName.toLowerCase()))
-    console.log(productsByName)
+
+    const productsByName = useMemo(() => {
+        return products.filter((product) => product.title.toLowerCase().includes(productName.toLowerCase()))
+    }, [products, productName])
 
 
-
+    const handleClickCategory = (e) => {
+        setCurrentCategory(Number(e.target.dataset.category))
+    }
 
 
     useEffect(() => {
@@ -33,11 +41,24 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        axiosEcommerce
-            .get("products")
-            .then((res) => setProducts(res.data))
-            .catch((err) => console.log(err))
-    }, [])
+        if (currentCategory == 0) {
+            axiosEcommerce
+                .get("products")
+                .then((res) => setProducts(res.data))
+                .catch((err) => console.log(err))
+        }
+
+    }, [currentCategory])
+
+    useEffect(() => {
+        if (currentCategory !== 0) {
+            axiosEcommerce
+                .get(`products?categoryId=${currentCategory}`)
+                .then((res) => setProducts(res.data))
+                .catch((err) => console.log(err))
+        }
+    }, [currentCategory])
+
 
     return (
         <main className="px-4 ">
@@ -45,14 +66,14 @@ const Home = () => {
                 <div>
                     <input id="productName" type="text" placeholder="What are you looking for?" />
                     <button><i className='bx bx-search-alt'  ></i></button>
-
-                    <ul>
-                        <li>All</li>
-                        {
-                            categories.map(category => <li key={category.id}>{category.name}</li>)
-                        }
-                    </ul>
                 </div>
+                <ul>
+                    <li className=" cursor-pointer" onClick={handleClickCategory} data-category={0}>All</li>
+                    {
+                        categories.map(category => <li className=" cursor-pointer" onClick={handleClickCategory} data-category={category.id} key={category.id}>{category.name}</li>)
+                    }
+                </ul>
+
             </form>
             <section className='grid gap-8 py-6'>
                 {productsByName.map((product) => (<ProductCard key={product.id} product={product} />))
