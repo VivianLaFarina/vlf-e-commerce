@@ -8,6 +8,19 @@ const Home = () => {
 
     const [products, setProducts] = useState([])
 
+    const [productName, setProductName] = useState("")
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const newProductName = e.target.productName.value
+        setProductName(newProductName)
+
+    }
+    const productsByName = products.filter((product) => product.title.toLowerCase().includes(productName.toLowerCase()))
+    console.log(productsByName)
+
+
 
 
 
@@ -28,9 +41,9 @@ const Home = () => {
 
     return (
         <main className="px-4 ">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <input type="text" placeholder="What are you looking for?" />
+                    <input id="productName" type="text" placeholder="What are you looking for?" />
                     <button><i className='bx bx-search-alt'  ></i></button>
 
                     <ul>
@@ -41,9 +54,8 @@ const Home = () => {
                     </ul>
                 </div>
             </form>
-            <section className='grid gap-8'>
-                {
-                    products.map(product => <ProductCard key={product.id} product={product} />)
+            <section className='grid gap-8 py-6'>
+                {productsByName.map((product) => (<ProductCard key={product.id} product={product} />))
                 }
 
             </section>
