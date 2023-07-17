@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { axiosEcommerce } from '../../utils/configAxios'
 import SimilarProducts from './SimilarProducts'
+import { Link } from 'react-router-dom'
 
 const ProductDetail = ({ productId }) => {
 
     const [productData, setProductData] = useState()
+
+
     useEffect(() => {
         axiosEcommerce
             .get(`products/${productId}`)
             .then((res) => setProductData(res.data))
             .catch((err) => console.log(err))
 
-    }, [])
+    }, [productId])
     return (
         <>
+            <section className='flex gap-2 items-center'>
+                <Link to='/'>Home</Link>
+                <div className=" h-[5px] aspect-square bg-red-500 rounded-full"></div>
+                <span className='font-bold'>{productData?.title}</span>
+            </section>
 
             <section className=' grid gap-6 sm:grid-cols-2 sm:items-center max-w-[1000px] mx-auto ' >
                 <section >
@@ -45,7 +53,7 @@ const ProductDetail = ({ productId }) => {
                         Add to Cart <i className='bx bx-cart'></i>
                     </button>
 
-                    <p className='text-sm my-8 px-2 '>{productData?.description}</p>
+                    <p className='text-sm my-8 px-2 text-gray-800'>{productData?.description}</p>
 
                 </section>
             </section>
