@@ -5,9 +5,7 @@ import { axiosEcommerce } from '../utils/configAxios'
 
 const Home = () => {
     const [categories, setCategories] = useState([])
-
     const [products, setProducts] = useState([])
-
     const [productName, setProductName] = useState("")
     const [currentCategory, setCurrentCategory] = useState(0)
 
@@ -64,7 +62,7 @@ const Home = () => {
         <main className="px-4 ">
             <form onSubmit={handleSubmit}>
                 <div>
-                    <input id="productName" type="text" placeholder="What are you looking for?" />
+                    <input id="productName" type="text" placeholder="What are you looking for? " />
                     <button><i className='bx bx-search-alt'  ></i></button>
                 </div>
                 <ul>

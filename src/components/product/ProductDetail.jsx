@@ -13,7 +13,7 @@ const ProductDetail = ({ productId }) => {
     }, [])
     return (
         <section>
-            <section>
+            <section >
                 <div>
                     <img src={productData?.images[0].url} alt="" />
                 </div>
@@ -25,21 +25,21 @@ const ProductDetail = ({ productId }) => {
             <section className='grid grid-cols-2 mt-6 '>
                 <article>
                     <h4 className=' text-gray-400 font-bold '>Price</h4>
-                    <span className='font-bold text-lg ml-2' > ${productData?.price}</span>
+                    <span className='font-bold text-lg ml-2' > $ {productData?.price}</span>
 
                 </article>
 
                 <article>
                     <h4 className=' text-gray-400 font-bold'>Quantity</h4>
                     <div className='flex items-center'>
-                        <button className=' border-[1px] p-2 px-4'>-</button>
+                        <button className=' border-[1px] p-2 px-4 hover:bg-red-500 hover:text-white transition-colors'>-</button>
 
                         <span className=' border-[1px] p-2 px-4 border-x-0'>1</span>
-                        <button className=' border-[1px] p-2 px-4'>+</button>
+                        <button className=' border-[1px] p-2 px-4 hover:bg-red-500 hover:text-white transition-colors'>+</button>
                     </div>
                 </article>
             </section>
-            <button className=' w-full bg-red-500 py-2 text-white  hover:bg-red-600 transition-colors rounded-sm mt-6 '>
+            <button className=' w-full bg-red-500 py-2 text-white  hover:bg-red-700 transition-colors rounded-lg mt-6 '>
                 Add to Cart <i className='bx bx-cart'></i>
             </button>
 

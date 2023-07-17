@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
 
 
     return (
-        <Link to={`/products/${product.id}`} className="border-[1px] border-gray-300 rounded-md">
+        <Link to={`/product/${product.id}`} className="border-[1px] border-gray-300 rounded-md">
             <div className="p-4 border-b-[1px] border-gray-300 h-[200px] overflow-hidden  ">
 
                 <img className='h-full w-full object-contain' src={product.images[0].url} alt="" />
