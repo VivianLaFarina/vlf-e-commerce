@@ -59,7 +59,7 @@ const Home = () => {
 
 
     return (
-        <main className="px-4 ">
+        <main className="px-4   ">
             <form onSubmit={handleSubmit}>
                 <div>
                     <input id="productName" type="text" placeholder="What are you looking for? " />

@@ -22,7 +22,7 @@ const SimilarProducts = ({ categoryId, productId }) => {
     }, [categoryId, productId])
 
     return (
-        <section className='px-2'>
+        <section className='px-2 max-w-[1000px] mx-auto md:grid md:grid-flow-col'>
             <h2 className='text-red-500 font-bold text-lg mb-6 '>Discover similar items</h2>
             <section className='grid gap-6 py-4'>
                 {
