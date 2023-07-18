@@ -1,6 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { changeIsShowCart } from '../../store/slices/cart.silce'
+import { changeIsShowCart } from '../../store/slices/cart.slice'
 import { useDispatch } from 'react-redux'
 
 const Header = () => {
@@ -23,7 +22,7 @@ const Header = () => {
                 <Link to="/purchases" >
                     <i className='bx bx-box' ></i>
                 </Link>
-                <button onClick={handleClickChangeShowCart} >
+                <button onClick={handleClickChangeShowCart}>
                     <i className='bx bx-cart-download'></i>
                 </button>
             </nav>
