@@ -21,7 +21,7 @@ const Login = () => {
         <main className=' bg-gray-400 grid place-content-center'>
             {
                 token ? (
-                    <section>User logged</section>
+                    <section className=' bg-white p-4 rounded-md max-w-[360px] grid gap-6'>User logged</section>
                 ) : (
                     <form onSubmit={handleSubmit(submit)} className=' bg-white p-4 rounded-md max-w-[360px] grid gap-6'>
                         <h2 className=' text-2xl font-[500] text-gray-700'>Welcome! Enter your email and password to continue</h2>
