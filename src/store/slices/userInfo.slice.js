@@ -8,16 +8,22 @@ const initialState = {
 
 const userInfoSlice = createSlice({
   name: 'userInfo',
-  initialState,
+  initialState: JSON.parse(localStorage.getItem('userInfo')) ?? initialState,
   reducers: {
     setUserInfo: (state, action) => {
       const newState = { ...state, ...action.payload };
+      localStorage.setItem('userInfo', JSON.stringify(newState));
+      return newState;
+    },
+    logOutUser: (state) => {
+      const newState = { ...state, ...initialState };
+      localStorage.setItem('userInfo', JSON.stringify(newState));
       return newState;
     },
   },
 });
 
-export const { setUserInfo } = userInfoSlice.actions;
+export const { setUserInfo, logOutUser } = userInfoSlice.actions;
 
 export const loginUser = (data) => (dispatch) => {
   axiosEcommerce
