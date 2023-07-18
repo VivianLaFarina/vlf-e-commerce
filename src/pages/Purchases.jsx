@@ -9,19 +9,23 @@ const Purchases = () => {
     useEffect(() => {
         axiosEcommerce
             .get("purchases", getConfig())
-            .then((res) => setPurchases(res.data))
+            .then((res) => {
+                const orderPurchases = res.data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                setPurchases(orderPurchases)
+
+            })
             .catch((err) => console.log(err))
 
     }, [])
 
     return (
         <main className='px-2 max-w-[1000px] mx-auto'>
-            <section className='flex gap-2 items-center my-3s '>
+            <section className='flex gap-2 items-center my-3 '>
                 <Link to='/'>Home</Link>
                 <div className=" h-[5px] aspect-square bg-red-500 rounded-full"></div>
                 <span className='font-bold'> Purchases</span>
             </section>
-            <section className='grid gap-6 py-6'>
+            <section className='grid gap-10 py-6'>
                 {
                     purchases.map(purchase => <PurchaseCard key={purchase.id} purchase={purchase} />)
                 }
